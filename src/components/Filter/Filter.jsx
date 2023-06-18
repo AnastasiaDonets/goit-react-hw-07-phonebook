@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filterSlice';
 import { Label, Input } from './Filter.styled';
-import PropTypes from 'prop-types';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -15,8 +14,4 @@ export const Filter = () => {
       <Input type="text" name="filter" onChange={handleFilter} />
     </Label>
   );
-};
-
-Filter.propTypes = {
-  onFilter: PropTypes.func.isRequired,
 };

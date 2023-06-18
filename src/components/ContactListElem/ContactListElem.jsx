@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 import PropTypes from 'prop-types';
 import { ListElem, Text, Button } from './ContactListElem.styled';
 
@@ -26,5 +26,4 @@ ContactListElem.propTypes = {
   contactName: PropTypes.string.isRequired,
   contactNumber: PropTypes.string.isRequired,
   contactId: PropTypes.string.isRequired,
-  contactDelete: PropTypes.func.isRequired,
 };

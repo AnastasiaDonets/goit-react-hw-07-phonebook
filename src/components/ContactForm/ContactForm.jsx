@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 import { Formik } from 'formik';
 import { object, string } from 'yup';
 import 'yup-phone';
@@ -14,12 +13,12 @@ import {
 } from './ContactForm.styled';
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const initialValues = {
     name: '',
-    number: '',
+    phone: '',
   };
   const FormScheme = object({
     name: string()
@@ -29,7 +28,7 @@ export const ContactForm = () => {
         excludeEmptyString: true,
       })
       .required('Required'),
-    number: string()
+    phone: string()
       .matches(
         /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
         {
@@ -51,7 +50,7 @@ export const ContactForm = () => {
       dispatch(addContact(values));
       resetForm({
         name: '',
-        number: '',
+        phone: '',
       });
     }
   };
@@ -72,15 +71,11 @@ export const ContactForm = () => {
         </Label>
         <Label>
           Number
-          <Input type="tel" name="number" />
-          <ErrorText name="number" component="p" />
+          <Input type="tel" name="phone" />
+          <ErrorText name="phone" component="p" />
         </Label>
         <FormBtn type="submit">Add contact</FormBtn>
       </FormikForm>
     </Formik>
   );
-};
-
-ContactForm.propTypes = {
-  onFormSubmit: PropTypes.func.isRequired,
 };
